@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 const defaultURL =
-  "https://twitter.com/motivational/status/1462934836222599172";
+  "https://stackoverflow.com/questions/38158027/express-4-14-how-to-send-200-status-with-a-custom-message";
 const defaultWidth = 1366;
 const defaultHeight = 768;
 const defaultDir = "temp/";
