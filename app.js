@@ -3,9 +3,10 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var fileupload = require("express-fileupload");
 
 var indexRouter = require("./routes/index");
-var validationRouter = require("./routes/validation.js");
+var imageCompressionRouter = require("./routes/image-compression.js");
 var pageScreenshotRouter = require("./routes/page-screenshot.js");
 var pagePdfRouter = require("./routes/page-pdf.js");
 
@@ -13,6 +14,7 @@ var cors = require("cors");
 var app = express();
 
 app.use(cors());
+app.use(fileupload());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -25,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/validation", validationRouter);
+app.use("/image-compression", imageCompressionRouter);
 app.use("/page-pdf", pagePdfRouter);
 app.use("/page-screenshot", pageScreenshotRouter);
 
@@ -42,7 +44,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.send("error");
 });
 
 module.exports = app;
